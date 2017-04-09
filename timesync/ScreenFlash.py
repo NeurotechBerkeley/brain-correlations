@@ -5,7 +5,7 @@ import pygame
 import time
 
 pygame.init()
-screen = pygame.display.set_mode((1000, 1000))
+screen = pygame.display.set_mode((2000, 1300))
 
 screen.fill((0, 0, 0))
 pygame.display.flip()
