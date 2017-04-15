@@ -72,7 +72,7 @@ def save_data(res, timestamps):
 
 
     data.to_csv(options.filename, float_format='%.3f', index=False)
-    
+    print('saved at time {}'.format(time())
 
     
 res = []
