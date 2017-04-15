@@ -100,7 +100,6 @@ while True:
         break
 
 
-
-
+save_data(res, timestamps)
 
 print('Done !')
