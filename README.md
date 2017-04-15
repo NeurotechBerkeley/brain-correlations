@@ -8,7 +8,7 @@ is driven by the stimulus, then brain signals across different sessions should b
 
 ### Setup
 
-First, install the libraries (there are new python dependencies this time!):
+First, install the libraries:
 ``` bash
 cd recording
 npm install
@@ -21,8 +21,8 @@ pip install -r requirements.txt
 
 - Attach electrodes to participant's head, 2 on the frontal cortex (on forehead) and 2 on temporal lobe (right above the ears).
 - Connect to the ganglion and stream data: `cd recording; node ganglion-lsl.js`
-- Run lsl-viewer to check connections and stream: `python recording/lsl-viewer.py`
-- Record data: `python recording/lsl-record.py`
+- Run lsl-viewer to check connections and stream: `cd recording; python lsl-viewer.py`
+- Record data: `cd recording; python lsl-record.py`
 - Stop recording data by pressing Control-C in the `lsl-record.py` script
 
 ### Analysis
