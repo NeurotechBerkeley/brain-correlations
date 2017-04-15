@@ -54,7 +54,7 @@ ch_names = [ch.child_value('label')]
 for i in range(1, Nchan):
     ch = ch.next_sibling()
     ch_names.append(ch.child_value('label'))
- 
+
 def save_data(res, timestamps):
     res = np.concatenate(res, axis=0)
     timestamps = np.array(timestamps)
@@ -72,9 +72,8 @@ def save_data(res, timestamps):
 
 
     data.to_csv(options.filename, float_format='%.3f', index=False)
-    print('saved at time {}'.format(time())
+    print('saved at time {}'.format(time()))
 
-    
 res = []
 timestamps = []
 markers = []
@@ -93,14 +92,14 @@ while True:
             marker, timestamp = inlet_marker.pull_sample(timeout=0.0)
             if timestamp:
                 markers.append([marker, timestamp])
+        n+=1
+        if n > 100:
+            save_data(res, timestamps)
+            n = 0
     except KeyboardInterrupt:
         break
 
-    n+=1
-    if n > 100:
-        save_data(res, timestamps)
-        n = 0
-    
+
 
 
 
