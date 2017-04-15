@@ -22,15 +22,8 @@ pip install -r requirements.txt
 - Attach electrodes to participant's head, 2 on the frontal cortex (on forehead) and 2 on temporal lobe (right above the ears).
 - Connect to the ganglion and stream data: `cd recording; node ganglion-lsl.js`
 - Run lsl-viewer to check connections and stream: `python recording/lsl-viewer.py`
-- Record data (replace "name" with your name, and "movie" with "sintel" or "bunny"):
-  `python recording/lsl-record.py -f data/data_1.csv`
-- Press enter on movie to really start movie
+- Record data: `python recording/lsl-record.py`
 - Stop recording data by pressing Control-C in the `lsl-record.py` script
 
 ### Analysis
-
-- Open `analysis/cross_brain_correlation.ipynb`
-- Replace the filenames at the beginning with your filenames
-- Run it and see the correlations!
-
-(If you couldn't successfully collect data, I have put in some example files that I collected that you can try analyzing as well, inside data)
+...will come in time
