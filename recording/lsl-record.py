@@ -7,7 +7,7 @@ from optparse import OptionParser
 from pylsl import StreamInlet, resolve_byprop
 # from sklearn.linear_model import LinearRegression
 
-default_fname = ("../data/data_%s.csv" % strftime("%Y-%m-%d-%H.%M.%S", gmtime()))
+default_fname = ("../data/data_%s.csv" % strftime("%Y-%m-%d_%H-%M-%S", gmtime()))
 parser = OptionParser()
 parser.add_option("-d", "--duration",
                   dest="duration", type='int', default=100,
@@ -54,13 +54,35 @@ ch_names = [ch.child_value('label')]
 for i in range(1, Nchan):
     ch = ch.next_sibling()
     ch_names.append(ch.child_value('label'))
+ 
+def save_data(res, timestamps):
+    res = np.concatenate(res, axis=0)
+    timestamps = np.array(timestamps)
 
+    res = np.c_[timestamps, res]
+    data = pd.DataFrame(data=res, columns=['timestamps'] + ch_names)
+
+    data['Marker'] = 0
+    # process markers:
+    for marker in markers:
+        # find index of margers
+        ix = np.argmin(np.abs(marker[1] - timestamps))
+        val = timestamps[ix]
+        data.loc[ix, 'Marker'] = marker[0][0]
+
+
+    data.to_csv(options.filename, float_format='%.3f', index=False)
+    
+
+    
 res = []
 timestamps = []
 markers = []
 t_init = time()
+n = 0
 print('Start recording at time t=%.3f' % t_init)
-while (time() - t_init) < options.duration:
+# while (time() - t_init) < options.duration:
+while True:
     try:
         data, timestamp = inlet.pull_chunk(timeout=1.0,
                                            max_samples=12)
@@ -74,28 +96,12 @@ while (time() - t_init) < options.duration:
     except KeyboardInterrupt:
         break
 
-res = np.concatenate(res, axis=0)
-timestamps = np.array(timestamps)
-
-# if dejitter:
-#     y = timestamps
-#     X = np.atleast_2d(np.arange(0, len(y))).T
-#     lr = LinearRegression()
-#     lr.fit(X, y)
-#     timestamps = lr.predict(X)
-
-res = np.c_[timestamps, res]
-data = pd.DataFrame(data=res, columns=['timestamps'] + ch_names)
-
-data['Marker'] = 0
-# process markers:
-for marker in markers:
-    # find index of margers
-    ix = np.argmin(np.abs(marker[1] - timestamps))
-    val = timestamps[ix]
-    data.loc[ix, 'Marker'] = marker[0][0]
+    n+=1
+    if n > 100:
+        save_data(res, timestamps)
+        n = 0
+    
 
 
-data.to_csv(options.filename, float_format='%.3f', index=False)
 
 print('Done !')
