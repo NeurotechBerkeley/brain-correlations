@@ -6,6 +6,10 @@ attention.  The idea is that, the more people pay attention to a stimulus, the
 more their brain is driven by a stimulus and not their internal thoughts. If it
 is driven by the stimulus, then brain signals across different sessions should be similar.
 
+### Data
+
+We collected some data in a real classroom. You can find it [here](https://drive.google.com/open?id=0B5ZCoyk1jxRMTTNwUUVWMUtkSHM).
+
 ### Setup
 
 First, install the libraries:
