@@ -5,7 +5,7 @@ import pygame
 import time
 
 pygame.init()
-screen = pygame.display.set_mode((2000, 1300))
+screen = pygame.display.set_mode((2200, 1400))
 
 screen.fill((0, 0, 0))
 pygame.display.flip()
@@ -26,7 +26,9 @@ time.sleep(1)
 
 import csv
 
-with open("init_times.csv", "w") as csvfile:
+fname = "init_times_{}.csv".format(time.strftime("%Y-%m-%d_%H-%M-%S", time.gmtime()))
+
+with open(fname, "w") as csvfile:
     csv_writer = csv.writer(csvfile)
     csv_writer.writerow(["color", "time"])
     csv_writer.writerow(["white", white_time])
