@@ -34,4 +34,4 @@ To make sure the timestamps are synced across computers, run this to sync to App
 - Stop recording data by pressing Control-C in the `lsl-record.py` script
 
 ### Analysis
-...will come in time
+Check out the iPython Notebooks in the analysis directory!
